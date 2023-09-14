@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Appointment_Show </title>
+    <h1> All Appointment Information</h1>
+    <style>h1{text-align: center;}</style>
+</head>
+
+
+{% block body %}
+
+<div class="container mt-0">
+					<div class="row breadcrumb-bar">
+						<div class="col-md-6">
+							<h3 class="block-title">View Appointment</h3>
+						</div>
+						<div class="col-md-6">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item">
+									<a href="index.html">
+										<span class="ti-home"></span>
+									</a>
+								</li>
+								<li class="breadcrumb-item">Add Appointment</li>
+								<li class="breadcrumb-item active">View Appointment</li>
+							</ol>
+						</div>
+					</div>
+				</div>
+
+
+<body>
+    <div class="container">
+        <div class="table table-dark table-bordered">
+            <from>
+                <table align="center">
+                    <tr> 
+                        <th> Id </th></br> 
+                        <th> Doctor_name </th>
+                        <th> Department </th>
+                        <th> Patients </th>
+                        <th> Appointment Date</th>     
+                        <th> Time_slot </th>
+                        <th> Token </th>
+                        <th> Problem </th>
+                        <th> Action </th>
+
+                    </tr></label>
+                    {% for Appoint in appoints %}
+                        {% csrf_token %}
+                        <tr> 
+                            <td>{{Appoint.id}} </td>
+                            <td>{{Appoint.Dr_name}} </td>
+                            <td>{{Appoint.Dr_dep}} </td>
+                            <td>{{Appoint.Cust_name}} </td>
+                            <td>{{Appoint.Apptment_Date}} </td>
+                            <td> {{Appoint.Time_slot}} </td>
+                            <td> {{Appoint.Token}} </td>
+                            <td> {{Appoint.Problem}} </td>
+                            <td>
+                                <form action="{% url 'edit_appointment' Appoint.id %}" method="post"> 
+                                    {% csrf_token %}
+                                    <input type="submit" value="Update">
+                                </form>
+                                <form action="{% url 'delete_appointment' Appoint.id %}" method="post">
+                                    {% csrf_token %}
+                                <input type="submit" class="btn btn-danger" value="Delete">
+                                </form>
+
+                        </tr>
+                    {% endfor %}
+                </table>
+                <a href="{% url 'csv_create_apointment' %}" method="post" class="btn btn-warning">CSV export</a>&ensp;
+                <a href="{% url 'excel_create_apointment' %}" method="post" class="btn btn-warning">Excel export</a>&ensp;
+            </from>
+        </div>
+    </div>
+</body>
+{% endblock  %}
+</html>

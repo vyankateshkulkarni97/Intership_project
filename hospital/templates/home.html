@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html>
+				
+
+{% block body  %}
+<div class="container mt-0">
+					<div class="row breadcrumb-bar">
+						<div class="col-md-6">
+							<h3 class="block-title">Add Patient</h3>
+						</div>
+						<div class="col-md-6">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item">
+									<a href="index.html">
+										<span class="ti-home"></span>
+									</a>
+								</li>
+								<li class="breadcrumb-item">Patients</li>
+								<li class="breadcrumb-item active">Add Patient</li>
+							</ol>
+						</div>
+					</div>
+				</div>
+<body>
+    <form action="{% url 'home_page' %}" method="post" class="container">
+        <fieldset>
+        {% csrf_token %}
+        <legend></legend>
+        {% if edit_patient %}
+            <label class="required"> ID :- </label>
+                <input type="text" name="id" value="{{edit_patient.id}}" readonly><br><br>
+        {% endif %}
+
+        &emsp;<label class="required"> Name :- </label>
+        &emsp;&emsp;&emsp;&emsp;&emsp;<input type="text" name="name" value="{{edit_patient.Name}}" placeholder="Enter name" required><br><br>
+        &emsp;<label class="required"> Age :- </label> 
+        &emsp;&emsp;&emsp;&emsp;&emsp;<input type="number" name="age" value="{{edit_patient.Age}}" placeholder="Enter Age" required>
+        &emsp;<label class="required"> Phone_Number :- </label>
+        &emsp;<input type="number" name="phone" value="{{edit_patient.Phone}}" placeholder="Enter Number" required><br><br>
+        &emsp;<label class="required"> date_of_birth :- </label>
+        &emsp;<input type="date" datetime="DD-MM-YYYY" name="date_of_birth" value="{{edit_patient.Date_of_birth}}" placeholder="Enter name" required>
+        &emsp;&emsp;&emsp;&emsp;&emsp;<label class="required"> last_visit :- </label>
+        &emsp;&emsp;<input type="text" name="last_visit" value="{{edit_patient.Last_visit}}" placeholder="Enter Lst_visti" required><br><br>
+        &emsp;<label class="required"> gender :- </label>
+        &emsp;&emsp;&emsp;&emsp;<input type="text" name="gender" value="{{edit_patient.Gender}}" placeholder="Enter Gender" required>
+        &emsp;<label class="required"> email :- </label>
+        &emsp;<input type="text" name="email" value="{{edit_patient.Email}}" placeholder="Enter Email" required><br><br>
+        &emsp;<label class="required"> address :- </label>
+        &emsp;&emsp;&emsp;<input type="text" name="address" value="{{edit_patient.Address}}" placeholder="Enter Address" required>
+        &emsp;<label class="required"> status :- </label> 
+        &emsp;<input type="text" name="status" value="{{edit_patient.Status}}" placeholder="Enter Status" required><br><br>
+        &emsp; <input type="submit" class="btn btn-primary" value="Submit"> &ensp; &emsp;
+                            
+        </fieldset>
+
+
+
+    </from>
+</body>
+{% endblock  %}
+</html>

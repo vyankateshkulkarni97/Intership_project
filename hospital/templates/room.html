@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html>
+<head>
+<title>Room_page</title>
+<style>
+h1 {
+  text-align: center;
+}
+</style>
+<h1> Book Room</h1>
+</head>
+
+{% block body %}
+
+<div class="container mt-0">
+					<div class="row breadcrumb-bar">
+						<div class="col-md-6">
+							<h3 class="block-title">Book Room</h3>
+						</div>
+						<div class="col-md-6">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item">
+									<a href="index.html">
+										<span class="ti-home"></span>
+									</a>
+								</li>
+								<li class="breadcrumb-item">Book Room</li>
+								<li class="breadcrumb-item active">View Room</li>
+							</ol>
+						</div>
+					</div>
+				</div>
+
+<body>
+    <form action="{% url 'room' %}" method="post" class="container">
+        <fieldset>
+        {% csrf_token %}
+        <legend></legend>
+        {% if Rooms_p %}
+            <label class="required"> ID :- </label>
+                <input type="text" name="id" value="{{Rooms_p.id}}" readonly><br><br>
+        {% endif %}
+        &emsp;<label class="required"> Room Number :- </label>    
+        &emsp;&emsp;&emsp;<input type="text" name="room_no" value="{{Rooms_p.Room_No}}" placeholder="Enter Number" required><br><br>
+            &emsp;<label class="required"> Room Type :- </label> 
+                &emsp;&emsp;&emsp;&emsp;<input type="text" name="room_type" value="{{Rooms_p.Room_Type}}" placeholder="Enter  Type" required>
+            &emsp;&emsp;<label class="required"> Room Allotment date :- </label>
+                &emsp;&emsp;<input type="date" datetime="YYYY-MM-DD" name="alt_dt" value="{{Rooms_p.Alt_dt}}" placeholder="Enter date" required><br><br>
+            &emsp;<label class="required"> Room Discharge date:- </label>
+                &emsp;&emsp;&emsp;<input type="date" datetime="YYYY-MM-DD" name="dis_dt" value="{{Rooms_p.Dis_dt}}" placeholder="Enter date" required>
+            &emsp;&emsp;<label class="required"> Room Status :- </label>
+                &emsp;&emsp;&emsp;&emsp;<input type="text" name="r_status" value="{{Rooms_p.Room_Status}}"  placeholder="Enter Status" required><br><br>
+           
+            &emsp; <input type="submit" class="btn btn-primary" value="Submit"> &ensp; &emsp;
+                            
+        </fieldset>
+
+    </from>
+
+</body>
+{% endblock  %}
+
+
+</html>

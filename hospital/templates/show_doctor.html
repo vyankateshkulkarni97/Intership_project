@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html>
+<head>
+    
+</head>
+{% block body %}
+
+<div class="container mt-0">
+					<div class="row breadcrumb-bar">
+						<div class="col-md-6">
+							<h3 class="block-title">Show Doctor</h3>
+						</div>
+						<div class="col-md-6">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item">
+									<a href="index.html">
+										<span class="ti-home"></span>
+									</a>
+								</li>
+								<li class="breadcrumb-item">Doctor</li>
+								<li class="breadcrumb-item active">Show Doctor</li>
+							</ol>
+						</div>
+					</div>
+				</div>
+
+<style>
+        table , th , td {
+            border: 0.5px solid black;
+        }
+        body{
+    background-color:#ccffff;
+}
+</style>
+
+<body>
+    <div class="container">
+        <div class="table table-dark table-bordered">
+            <from>
+                <table align="center">
+                    <tr> 
+                        <th> Id </th></br>   
+                        <th> Name </th>     
+                        <th> Age </th>
+                        <th> Experience </th>
+                        <th> Phone </th>
+                        <th> Email </th>
+                        <th> Gender </th>
+                        <th> specialization </th>
+                        <th> Available </th>
+                        <th> visit_date </th>
+                        <th> Action </th>
+
+                    </tr>
+                    
+                    {% for doctor in Doctor %}
+                        {% csrf_token %}
+                        <tr> 
+                            <td>{{doctor.id}} </td>
+                            <td>{{doctor.Doctors_N}} </td>
+                            <td> {{doctor.Doctors_Age}} </td>
+                            <td> {{doctor.Experience}} </td>
+                            <td> {{doctor.Phone}} </td>
+                            <td> {{doctor.Email}} </td>
+                            <td> {{doctor.Gender}} </td>
+                            <td> {{doctor.Specialization}} </td>
+                            <td> {{doctor.Availability}} </td>
+                            <td> {{doctor.Visit_date}} </td>
+                            <td>
+                                <form action="{% url 'edit_doctor' doctor.id %}" method="post">
+                                    {% csrf_token %}
+                                    <input type="submit" value="Update">
+                                </form>
+                                <form action="{% url 'delete_doctors' doctor.id%}" method="post">
+                                    {% csrf_token %}
+                                <input type="submit" class="btn btn-danger" value="Delete">
+                                </form>
+
+                        </tr>
+                    {% endfor %}
+                    </table>
+                    <a href="{% url 'csv_create_doctor' %}" method="post" class="btn btn-warning">csv export</a>&ensp;
+                    <a href="{% url 'excel_create_doctor' %}" method="post" class="btn btn-warning">csv export</a>&ensp;
+            </from>
+        </div>
+    </div>
+</body>
+{% endblock  %}
+</html>

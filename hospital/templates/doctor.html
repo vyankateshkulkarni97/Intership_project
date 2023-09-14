@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html>
+<head>
+<title>Doctor_page</title>
+<style>
+h1 {
+  text-align: center;
+}
+</style>
+<h1> Add Doctor</h1>
+</head>
+
+{% block body %}
+<div class="container mt-0">
+					<div class="row breadcrumb-bar">
+						<div class="col-md-6">
+							<h3 class="block-title">Add Doctor</h3>
+						</div>
+						<div class="col-md-6">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item">
+									<a href="index.html">
+										<span class="ti-home"></span>
+									</a>
+								</li>
+								<li class="breadcrumb-item">Doctor</li>
+								<li class="breadcrumb-item active">Add Doctor</li>
+							</ol>
+						</div>
+					</div>
+				</div>
+
+
+<body>
+    <form action="{% url 'Add_Doctor' %}" method="post" class="container" >
+        <fieldset>
+        {% csrf_token %}
+        <legend></legend>
+        {% if doctors %}
+            <label class="required"> ID :- </label>
+                <input type="text" name="id" value="{{doctors.id}}" readonly><br><br>
+        {% endif %}
+
+        &emsp;<label class="required"> Name :- </label>
+        &emsp;&emsp;&emsp;<input type="text" name="name" value="{{doctors.Doctors_N}}"  placeholder="Enter name" required><br><br>
+            &emsp;<label class="required"> Age :- </label> 
+                &emsp;&emsp;&emsp;&emsp;<input type="number" name="age" value="{{doctors.Doctors_Age}}"  placeholder="Enter Age" required>
+            &emsp;&emsp;<label class="required"> Experience :- </label>
+                &emsp;&emsp;<input type="number" name="experience" value="{{doctors.Experience}}" placeholder="Enter Experience" required><br><br>
+            &emsp;<label class="required"> Phone :- </label>
+                &emsp;&emsp;&emsp;<input type="number" name="phone" value="{{doctors.Phone}}" placeholder="Enter Phone" required>
+            &emsp;&emsp;<label class="required"> Email :- </label>
+                &emsp;&emsp;&emsp;&emsp;<input type="text" name="email" value="{{doctors.Email}}"  placeholder="Enter Email" required><br><br>
+            &emsp;<label class="required"> Gender :- </label>
+                &emsp;&emsp;&emsp;<input type="text" name="gender" value="{{doctors.Gender}}"  placeholder="Enter Gender" required>
+            &emsp;<label class="required"> Specialization :- </label>
+                &emsp;<input type="text" name="specialization" value="{{doctors.Specialization}}"  placeholder="Enter Specialization" required><br><br>
+            &emsp;<label class="required"> Availability :- </label>
+                &emsp;<input type="text" name="availability" value="{{doctors.Availability}}"  placeholder="Enter Availability" required>
+            &emsp;<label class="required"> Visit_date :- </label> 
+                &emsp;&emsp;&emsp;<input type="date" datetime="MM-DD-YYYY" name="visit_date" value="{{doctors.Visit_date}}" placeholder="DD-MM-YYYY" required><br><br>
+            &emsp;<label class="required"> Problem :- </label> 
+                &emsp;&emsp;<input type="text" name="problem" value="{{doctors.Problem}}" placeholder="Enter Problem" required><br><br>
+            &emsp; <input type="submit" class="btn btn-primary" value="Submit"> &ensp; &emsp;
+                            
+        </fieldset>
+
+    </from>
+
+</body>
+{% endblock  %}
+</html>

@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title> patient_Show </title>
+    <h1> All Room Information</h1>
+    <style>h1{text-align: center;}</style>
+</head>
+
+
+{% block body %}
+
+<div class="container mt-0">
+					<div class="row breadcrumb-bar">
+						<div class="col-md-6">
+							<h3 class="block-title">View Room</h3>
+						</div>
+						<div class="col-md-6">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item">
+									<a href="index.html">
+										<span class="ti-home"></span>
+									</a>
+								</li>
+								<li class="breadcrumb-item">Book Room</li>
+								<li class="breadcrumb-item active">View Room</li>
+							</ol>
+						</div>
+					</div>
+				</div>
+
+<style>
+        table , th , td {
+            border: 1px solid black;
+        }
+        body{
+    background-color:#ccffff;
+}
+</style>
+<body>
+    <div class="container">
+        <div class="table table-dark table-bordered">
+            <from>
+                <table align="center">
+                    <tr> 
+                        <th> Id </th></br>   
+                        <th> Room_Number </th>     
+                        <th> Room_Type </th>
+                        <th> Alloment_date </th>
+                        <th> Discharge_date </th>
+                        <th> Room_Status </th>
+                        <th> Action </th>
+
+                    </tr>
+                    {% for Rooms in room %}
+                        {% csrf_token %}
+                        <tr> 
+                            <td>{{Rooms.id}} </td>
+                            <td>{{Rooms.Room_No}} </td>
+                            <td> {{Rooms.Room_Type}} </td>
+                            <td> {{Rooms.Alt_dt}} </td>
+                            <td> {{Rooms.Dis_dt}} </td>
+                            <td> {{Rooms.Room_Status}} </td>
+                            <td>
+                                <form action="{% url 'edit_room' Rooms.id%}" method="post"> 
+                                    {% csrf_token %}
+                                    <input type="submit" value="Update">
+                                </form>
+                                <form action="{% url 'delete_room' Rooms.id%}" method="post">
+                                    {% csrf_token %}
+                                <input type="submit" class="btn btn-danger" value="Delete">
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+                <a href="{% url 'csv_create_Room' %}" method="post" class="btn btn-warning">csv export</a>&ensp;
+                <a href="{% url 'excel_create_Room' %}" method="post" class="btn btn-warning">Excel export</a>&ensp;
+            </from>
+        </div>
+    </div>
+</body>
+{% endblock  %}
+
+</html>
